@@ -335,3 +335,8 @@
 (setq auto-save-default nil)
 ;;关闭生成备份文件
 (setq make-backup-files nil)
+;;重新加载文件
+(defun refresh-file ()
+  (interactive)
+    (revert-buffer t (not (buffer-modified-p)) t))
+    (global-set-key [(control f5)] 'refresh-file)
