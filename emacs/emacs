@@ -9,7 +9,8 @@
 (require 'color-theme)
 (color-theme-initialize)
 ;; Pierson/Calm Forest/Midnight
-(color-theme-oswald)
+;;(color-theme-oswald)
+(color-theme-deep-blue)
 
 ;;加载php-mode
 (require 'php-mode)
