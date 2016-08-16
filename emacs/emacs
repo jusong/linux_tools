@@ -9,7 +9,8 @@
 (require 'color-theme)
 (color-theme-initialize)
 ;; Pierson/Calm Forest/Midnight
-(color-theme-oswald)
+;;(color-theme-oswald)
+(color-theme-deep-blue)
 
 ;;加载php-mode
 (require 'php-mode)
@@ -36,6 +37,7 @@
 
 ;;设置字体及大小
 ;;(set-default-font "-bitstream-Courier 10 Pitch-normal-normal-normal-*-24-*-*-*-m-0-iso10646-1")
+;;(set-default-font "-Bits-Bitstream Cyberbit-normal-normal-normal-*-24-*-*-*-*-0-iso10646-1")
 ;;格式:字体名称-字号
 (set-default-font "Courier 10 Pitch-18")
 
@@ -335,3 +337,8 @@
 (setq auto-save-default nil)
 ;;关闭生成备份文件
 (setq make-backup-files nil)
+;;重新加载文件
+(defun refresh-file ()
+  (interactive)
+    (revert-buffer t (not (buffer-modified-p)) t))
+    (global-set-key [(control f5)] 'refresh-file)
