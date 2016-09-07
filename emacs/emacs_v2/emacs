@@ -39,9 +39,9 @@
 
 ;;设置字体及大小
 ;;(set-default-font "-bitstream-Courier 10 Pitch-normal-normal-normal-*-24-*-*-*-m-0-iso10646-1")
-;;(set-default-font "-Bits-Bitstream Cyberbit-normal-normal-normal-*-24-*-*-*-*-0-iso10646-1")
+(set-default-font "-Bits-Bitstream Cyberbit-normal-normal-normal-*-24-*-*-*-*-0-iso10646-1")
 ;;格式:字体名称-字号
-(set-default-font "Courier 10 Pitch-18")
+;;(set-default-font "Courier 10 Pitch-18")
 
 ;;注释代码(dwim: Do What I Mean)(Alt-;)
 (defun qiang-comment-dwim-line (&optional arg)
@@ -228,45 +228,46 @@
 ;; ;;;;注意：我在这里把.h关联到了c++-mode
 ;; (setq auto-mode-alist
 ;;       (append '(("\\.h$" . c++-mode)) auto-mode-alist))
-;; ;;;;我的C语言编辑策略
-;; (defun my-c-mode-common-hook()
-;;   (setq default-tab-width 4 indent-tabs-mode nil)
-;;   (setq tab-width 4 indent-tabs-mode nil)
-;;   (setq c-basic-offset 4)
-;;   ;;; hungry-delete and auto-newline
-;;   (c-toggle-auto-hungry-state 1)
-;;   ;;按键定义
-;;   ;(define-key c-mode-base-map [(control \`)] 'hs-toggle-hiding)
-;;   (define-key c-mode-base-map [(return)] 'newline-and-indent)
-;;   (define-key c-mode-base-map [(f7)] 'do-compile)
-;;   ;(define-key c-mode-base-map [(f8)] 'ff-get-other-file)
-;;   (define-key c-mode-base-map [(meta \`)] 'c-indent-command)
+;;;;我的C语言编辑策略
+(defun my-c-mode-common-hook()
+  (setq default-tab-width 4 indent-tabs-mode nil)
+  (setq tab-width 4 indent-tabs-mode nil)
+  (setq c-basic-offset 4)
+  ;;; hungry-delete and auto-newline
+  (c-toggle-auto-hungry-state 1)
+  ;;按键定义
+  ;(define-key c-mode-base-map [(control \`)] 'hs-toggle-hiding)
+  (define-key c-mode-base-map [(return)] 'newline-and-indent)
+  (define-key c-mode-base-map [(f7)] 'do-compile)
+  ;(define-key c-mode-base-map [(f8)] 'ff-get-other-file)
+  (define-key c-mode-base-map [(meta \`)] 'c-indent-command)
 
-;;   ;(define-key c-mode-base-map [(tab)] 'hippie-expand)
-;;   (define-key c-mode-base-map [(tab)] 'my-indent-or-complete)
-;;   (define-key c-mode-base-map [(meta ?/)] 'semantic-ia-complete-symbol-menu)
-;;   ;;预处理设置
-;;   (setq c-macro-shrink-window-flag t)
-;;   (setq c-macro-preprocessor "cpp")
-;;   (setq c-macro-cppflags " ")
-;;   (setq c-macro-prompt-flag t)
-;;   (setq hs-minor-mode t)
-;;   (setq abbrev-mode t))
-;; (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
-;; ;;;;我的C++语言编辑策略
-;; (defun my-c++-mode-hook()
-;;   (setq default-tab-width 4 indent-tabs-mode nil)
-;;   (setq tab-width 4 indent-tabs-mode nil)
-;;   (setq c-basic-offset 4)
-;;   ;;(define-key c++-mode-map [f3] 'replace-regexp)
-;;   (c-set-style "stroustrup"))
-;; (add-hook 'c++-mode-hook 'my-c++-mode-hook)
+  ;(define-key c-mode-base-map [(tab)] 'hippie-expand)
+  (define-key c-mode-base-map [(tab)] 'my-indent-or-complete)
+  (define-key c-mode-base-map [(meta ?/)] 'semantic-ia-complete-symbol-menu)
+  ;;预处理设置
+  (setq c-macro-shrink-window-flag t)
+  (setq c-macro-preprocessor "cpp")
+  (setq c-macro-cppflags " ")
+  (setq c-macro-prompt-flag t)
+  (setq hs-minor-mode t)
+  (setq abbrev-mode t))
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+;;;;我的C++语言编辑策略
+(defun my-c++-mode-hook()
+  (setq default-tab-width 4 indent-tabs-mode nil)
+  (setq tab-width 4 indent-tabs-mode nil)
+  (setq c-basic-offset 4)
+  ;;(define-key c++-mode-map [f3] 'replace-regexp)
+  (c-set-style "stroustrup"))
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
 
 (set-fontset-font "fontset-default"
 		  'gb18030 '("Microsoft YaHei" . "unicode-bmp"))
 ;;tab键
 (global-set-key [C-tab] '(lambda () (interactive) (insert-char 9 1)))
+(setq default-tab-width 4)
 
 ;;关闭生成临时文件
 (setq auto-save-default nil)
@@ -278,3 +279,9 @@
   (revert-buffer t (not (buffer-modified-p)) t))
 (global-set-key [(control f5)] 'refresh-file)
 
+;; 当光标在行尾上下移动的时候，始终保持在行尾。   
+(setq track-eol t)
+;;粘贴于光标处，而不是鼠标指针处  
+(setq mouse-yank-at-point t)
+;;光标显示为一竖线  
+(setq-default cursor-type 'bar)
