@@ -66,7 +66,7 @@
 
 (ede-cpp-root-project "maze"
 		      :name "maze project"
-		      :file "/home/szjj_releaser/Workspace/c++/maze/main.cpp"
+		      :file "~/Workspace/c++/maze/main.cpp"
 		      :include-path '("/"
 				      "/include"
 				      )
