@@ -63,7 +63,7 @@
 					;自定义按键
 (global-set-key [f1] 'shell);F1进入Shell
 (global-set-key [f2] 'rename-buffer);F2修改缓冲区名字
-(global-set-key [f5] 'gdb);F5调试程序
+;;(global-set-key [f5] 'gdb);F5调试程序
 (setq compile-command "make -f Makefile")
 (global-set-key [f7] 'do-compile);F7编译文件
 (global-set-key [f8] 'other-window);F8窗口间跳转
@@ -234,7 +234,7 @@
   (setq tab-width 4 indent-tabs-mode nil)
   (setq c-basic-offset 4)
   ;;; hungry-delete and auto-newline
-  (c-toggle-auto-hungry-state 1)
+  ;;(c-toggle-auto-hungry-state 1)
   ;;按键定义
   ;(define-key c-mode-base-map [(control \`)] 'hs-toggle-hiding)
   (define-key c-mode-base-map [(return)] 'newline-and-indent)
@@ -271,8 +271,10 @@
 
 ;;关闭生成临时文件
 (setq auto-save-default nil)
+
 ;;关闭生成备份文件
 (setq make-backup-files nil)
+
 ;;重新加载文件
 (defun refresh-file ()
   (interactive)
@@ -281,7 +283,15 @@
 
 ;; 当光标在行尾上下移动的时候，始终保持在行尾。   
 (setq track-eol t)
+
 ;;粘贴于光标处，而不是鼠标指针处  
 (setq mouse-yank-at-point t)
+
 ;;光标显示为一竖线  
 (setq-default cursor-type 'bar)
+
+;;自动刷新文件（磁盘上文件被修改）
+(global-auto-revert-mode 1)
+
+;;默认工作目录
+(setq default-directory "~/Workspace/")
