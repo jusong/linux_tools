@@ -9,7 +9,7 @@ src_file=""
 yes=0
 rmhost="jiafd@121.199.42.40:"
 basedir="/data"
-
+option="lv2ts"
 while [ -n "$1" ]
 do
 	case $1 in
