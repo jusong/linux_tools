@@ -11,7 +11,8 @@
 (require 'color-theme)
 (color-theme-initialize)
 ;; Pierson/Calm Forest/Midnight
-(color-theme-bharadwaj-slate)
+;;(color-theme-bharadwaj-slate)
+(color-theme-kingsajz)
 ;; (color-theme-deep-blue)
 
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/themes/")
@@ -369,3 +370,14 @@
 ;;  ;; Your init file should contain only one such instance.
 ;;  ;; If there is more than one, they won't work right.
 ;;  )
+
+(set-face-attribute  'mode-line
+					 nil
+					 :foreground "gray80"
+					 :background "goldenrod"
+					 :box '(:line-width 1 :style released-button))
+(set-face-attribute  'mode-line-inactive
+					 nil
+					 :foreground "gray30"
+					 :background "gray10"
+					 :box '(:line-width 1 :style released-button))
