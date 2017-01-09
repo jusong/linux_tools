@@ -11,8 +11,12 @@
 (require 'color-theme)
 (color-theme-initialize)
 ;; Pierson/Calm Forest/Midnight
-;;(color-theme-oswald)
-(color-theme-deep-blue)
+(color-theme-bharadwaj-slate)
+;; (color-theme-deep-blue)
+
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/themes/")
+;;(setq molokai-theme-kit t)
+;; (load-theme 'molokai t)
 
 ;;加载php-mode
 (require 'php-mode)
@@ -32,14 +36,14 @@
 ;;回车自动缩进
 (global-set-key (kbd "RET") 'newline-and-indent)
 (add-hook 'html-mode-hook
-	  (lambda ()
-	    ;; Default indentation is usually 2 spaces, changing to 4.
-	    (set (make-local-variable 'sgml-basic-offset) 4)))
+		  (lambda ()
+			;; Default indentation is usually 2 spaces, changing to 4.
+			(set (make-local-variable 'sgml-basic-offset) 4)))
 
 
 ;;设置字体及大小
 ;;(set-default-font "-bitstream-Courier 10 Pitch-normal-normal-normal-*-24-*-*-*-m-0-iso10646-1")
-(set-default-font "-Bits-Bitstream Cyberbit-normal-normal-normal-*-24-*-*-*-*-0-iso10646-1")
+(set-default-font "-unknown-Courier10 BT-normal-normal-normal-*-21-*-*-*-m-0-iso10646-1")
 ;;格式:字体名称-字号
 ;;(set-default-font "Courier 10 Pitch-18")
 
@@ -54,13 +58,13 @@
 (global-set-key "\M-;" 'qiang-comment-dwim-line) 
 
 
-					;解决emacs shell 乱码
+										;解决emacs shell 乱码
 (setq ansi-color-for-comint-mode t)
 (customize-group 'ansi-colors)
 (kill-this-buffer);关闭customize窗口
 
 
-					;自定义按键
+										;自定义按键
 (global-set-key [f1] 'shell);F1进入Shell
 (global-set-key [f2] 'rename-buffer);F2修改缓冲区名字
 ;;(global-set-key [f5] 'gdb);F5调试程序
@@ -76,7 +80,7 @@
 (global-set-key (kbd "M-.") 'forward-page);文件尾
 (global-set-key (kbd "C-g") 'goto-line);跳转指定行
 
-					;普通设置
+										;普通设置
 (setq inhibit-startup-message t);关闭起动时闪屏
 (setq visible-bell t);关闭出错时的提示声
 (setq make-backup-files 0);不产生备份文件
@@ -100,7 +104,7 @@
 (setq default-fill-column 80);默认显示 80列就换行 
 
 
-					;鼠标滚轮，默认的滚动太快，这里改为3行
+										;鼠标滚轮，默认的滚动太快，这里改为3行
 (defun up-slightly () (interactive) (scroll-up 3))
 (defun down-slightly () (interactive) (scroll-down 3))
 (global-set-key [mouse-4] 'down-slightly)
@@ -145,7 +149,7 @@
 ;;       (kill-buffer (current-buffer))))
 
 
-					;全屏
+										;全屏
 (defun my-fullscreen ()
   (interactive)
   (x-send-client-message
@@ -202,22 +206,6 @@
       (hippie-expand nil)
     (indent-for-tab-command)))
 
-					;补全优先级
-(autoload 'senator-try-expand-semantic "senator")
-(setq hippie-expand-try-functions-list
-      '(
-	senator-try-expand-sematic
-	try-expand-dabbrev
-	try-expand-dabbrev-visible
-	try-expand-dabbrev-all-buffers
-	try-expand-dabbrev-from-kill
-	try-complete-file-name-partially
-	try-complete-file-name
-	try-expand-all-abbrevs
-	try-expand-list
-	try-expand-line
-	try-complete-lisp-symbol-partially
-	try-complete-lisp-symbol))
 
 ;;;; CC-mode配置  http://cc-mode.sourceforge.net/
 ;; (require 'cc-mode)
@@ -229,42 +217,43 @@
 ;; (setq auto-mode-alist
 ;;       (append '(("\\.h$" . c++-mode)) auto-mode-alist))
 ;;;;我的C语言编辑策略
-(defun my-c-mode-common-hook()
-  (setq default-tab-width 4 indent-tabs-mode nil)
-  (setq tab-width 4 indent-tabs-mode nil)
-  (setq c-basic-offset 4)
-  ;;; hungry-delete and auto-newline
-  ;;(c-toggle-auto-hungry-state 1)
-  ;;按键定义
-  ;(define-key c-mode-base-map [(control \`)] 'hs-toggle-hiding)
-  (define-key c-mode-base-map [(return)] 'newline-and-indent)
-  (define-key c-mode-base-map [(f7)] 'do-compile)
-  ;(define-key c-mode-base-map [(f8)] 'ff-get-other-file)
-  (define-key c-mode-base-map [(meta \`)] 'c-indent-command)
+;; (defun my-c-mode-common-hook()
+;;   (setq default-tab-width 4 indent-tabs-mode nil)
+;;   (setq tab-width 4 indent-tabs-mode nil)
+;;   (setq c-basic-offset 4)
+;;   ;;; hungry-delete and auto-newline
+;;   ;;(c-toggle-auto-hungry-state 1)
+;;   ;;按键定义
+;;   ;(define-key c-mode-base-map [(control \`)] 'hs-toggle-hiding)
+;;   (define-key c-mode-base-map [(return)] 'newline-and-indent)
+;;   (define-key c-mode-base-map [(f7)] 'do-compile)
+;;   ;(define-key c-mode-base-map [(f8)] 'ff-get-other-file)
+;;   (define-key c-mode-base-map [(meta \`)] 'c-indent-command)
 
-  ;(define-key c-mode-base-map [(tab)] 'hippie-expand)
-  (define-key c-mode-base-map [(tab)] 'my-indent-or-complete)
-  (define-key c-mode-base-map [(meta ?/)] 'semantic-ia-complete-symbol-menu)
-  ;;预处理设置
-  (setq c-macro-shrink-window-flag t)
-  (setq c-macro-preprocessor "cpp")
-  (setq c-macro-cppflags " ")
-  (setq c-macro-prompt-flag t)
-  (setq hs-minor-mode t)
-  (setq abbrev-mode t))
-(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
-;;;;我的C++语言编辑策略
-(defun my-c++-mode-hook()
-  (setq default-tab-width 4 indent-tabs-mode nil)
-  (setq tab-width 4 indent-tabs-mode nil)
-  (setq c-basic-offset 4)
-  ;;(define-key c++-mode-map [f3] 'replace-regexp)
-  (c-set-style "stroustrup"))
-(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+;;   ;(define-key c-mode-base-map [(tab)] 'hippie-expand)
+;;   (define-key c-mode-base-map [(tab)] 'my-indent-or-complete)
+;;   (define-key c-mode-base-map [(meta ?/)] 'semantic-ia-complete-symbol-menu)
+;;   ;;预处理设置
+;;   (setq c-macro-shrink-window-flag t)
+;;   (setq c-macro-preprocessor "cpp")
+;;   (setq c-macro-cppflags " ")
+;;   (setq c-macro-prompt-flag t)
+;;   (setq hs-minor-mode t)
+;;   (setq abbrev-mode t))
+;; (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+;; ;;;;我的C++语言编辑策略
+;; (defun my-c++-mode-hook()
+;;   (setq default-tab-width 4 indent-tabs-mode nil)
+;;   (setq tab-width 4 indent-tabs-mode nil)
+;;   (setq c-basic-offset 4)
+;;   ;;(define-key c++-mode-map [f3] 'replace-regexp)
+;;   (c-set-style "stroustrup"))
+;; (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
 
 (set-fontset-font "fontset-default"
-		  'gb18030 '("Microsoft YaHei" . "unicode-bmp"))
+				  'gb18030 '("Microsoft YaHei" . "unicode-bmp"))
+
 ;;tab键
 (global-set-key [C-tab] '(lambda () (interactive) (insert-char 9 1)))
 (setq default-tab-width 4)
@@ -295,3 +284,88 @@
 
 ;;默认工作目录
 (setq default-directory "~/Workspace/")
+
+;;Markdown Mode
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+;;修改启动两个窗口时的默认布局方式为横向布局
+(setq split-height-threshold nil)
+(setq split-width-threshold 0)
+
+;;多窗口切换
+;;set windows numbering  
+(require 'window-numbering)
+(window-numbering-mode 1)
+
+;;将光标移动到当前行的中间位置
+(defun middle-of-line ()
+  "Put cursor at the middle point of the line."
+  (interactive)
+  (goto-char (/ (+ (point-at-bol) (point-at-eol)) 2)))
+(global-set-key (kbd "C-z") 'middle-of-line)
+
+;;;;;;;;;;;;;;;;;;
+;; nyan-mode
+;;;;;;;;;;;;;;;;;;
+
+(add-to-list 'load-path "~/.emacs.d/nyan-mode")
+(require 'nyan-mode)
+(setq default-mode-line-format
+      (list ""
+            'mode-line-modified
+            "%10b"
+            '(:eval (when nyan-mode (list (nyan-create))));;注意添加此句到你的format配置列表中
+            " "
+;;            'default-directory
+            " "
+            "%[("
+            'mode-name
+            'minor-mode-list
+            "%n"
+            'mode-line-process
+            ")%]--"
+            "Line %l--"
+            '(-3 . "%P")
+            "-%-"))
+(nyan-mode t);;启动nyan-mode
+(nyan-start-animation);;开始舞动吧（会耗cpu资源）
+
+;; (custom-set-variables
+;;  ;; custom-set-variables was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(custom-safe-themes
+;;    (quote
+;; 	("c3c0a3702e1d6c0373a0f6a557788dfd49ec9e66e753fb24493579859c8e95ab" default)))
+;;  '(semantic-default-submodes
+;;    (quote
+;; 	(global-semantic-decoration-mode global-semantic-idle-completions-mode global-semantic-idle-scheduler-mode global-semanticdb-minor-mode global-semantic-idle-summary-mode global-semantic-mru-bookmark-mode)))
+;;  '(semantic-idle-scheduler-idle-time 3))
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  )
+;; (custom-set-variables
+;;  ;; custom-set-variables was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(custom-safe-themes
+;;    (quote
+;; 	("c3c0a3702e1d6c0373a0f6a557788dfd49ec9e66e753fb24493579859c8e95ab" default)))
+;;  '(semantic-default-submodes
+;;    (quote
+;; 	(global-semantic-decoration-mode global-semantic-idle-completions-mode global-semantic-idle-scheduler-mode global-semanticdb-minor-mode global-semantic-idle-summary-mode global-semantic-mru-bookmark-mode)))
+;;  '(semantic-idle-scheduler-idle-time 3))
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  )

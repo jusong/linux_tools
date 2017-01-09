@@ -1,0 +1,23 @@
+--- m2/markdown-mode.el	2017-01-07 19:41:57.621488204 +0800
++++ m1/markdown-mode.el	2017-01-07 19:42:24.638372311 +0800
+@@ -5217,18 +5217,8 @@ output filename based on that filename.
+   (when (buffer-file-name)
+     (unless extension
+       (setq extension ".html"))
+-    (let ((candidate
+-           (concat
+-            (cond
+-             ((buffer-file-name)
+-              (file-name-sans-extension (buffer-file-name)))
+-             (t (buffer-name)))
+-            extension)))
+-      (cond
+-       ((equal candidate (buffer-file-name))
+-        (concat candidate extension))
+-       (t
+-        candidate)))))
++	(setq tmpdir "/tmp/")
++	(concat tmpdir (buffer-name) extension)))
+ 
+ (defun markdown-export (&optional output-file)
+   "Run Markdown on the current buffer, save to file, and return the filename.
