@@ -112,7 +112,7 @@
   (local-set-key "\C-cl" 'semantic-ia-show-doc)
   (local-set-key "\C-cr" 'semantic-symref-symbol)
   (local-set-key "\C-c/" 'semantic-ia-complete-symbol)
-  ;;(local-set-key [(control return)] 'semantic-ia-complete-symbol)
+  (local-set-key [(control return)] 'semantic-ia-complete-symbol)
   (local-set-key "." 'semantic-complete-self-insert)
   (local-set-key ">" 'semantic-complete-self-insert)
   ;; Indent or complete
