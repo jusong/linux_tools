@@ -12,7 +12,9 @@
 (color-theme-initialize)
 ;; Pierson/Calm Forest/Midnight
 ;;(color-theme-bharadwaj-slate)
-(color-theme-kingsajz)
+;;(color-theme-kingsajz)
+(color-theme-aliceblue)
+;;(color-theme-andreas)
 ;; (color-theme-deep-blue)
 
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/themes/")
@@ -381,3 +383,7 @@
 					 :foreground "gray30"
 					 :background "gray10"
 					 :box '(:line-width 1 :style released-button))
+
+
+(global-set-key (kbd "C-c e") 'erase-buffer)
+(put 'erase-buffer 'disabled nil)
