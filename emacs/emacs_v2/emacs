@@ -11,7 +11,10 @@
 (require 'color-theme)
 (color-theme-initialize)
 ;; Pierson/Calm Forest/Midnight
-(color-theme-bharadwaj-slate)
+;;(color-theme-bharadwaj-slate)
+;;(color-theme-kingsajz)
+(color-theme-aliceblue)
+;;(color-theme-andreas)
 ;; (color-theme-deep-blue)
 
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/themes/")
@@ -162,10 +165,10 @@
   (interactive)
   (x-send-client-message
    nil 0 nil "_NET_WM_STATE" 32
-   '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
+   '(1 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
   (x-send-client-message
    nil 0 nil "_NET_WM_STATE" 32
-   '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+   '(1 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
   )
 ;; 启动emacs时窗口最大化
 (my-maximized)
@@ -369,3 +372,18 @@
 ;;  ;; Your init file should contain only one such instance.
 ;;  ;; If there is more than one, they won't work right.
 ;;  )
+
+(set-face-attribute  'mode-line
+					 nil
+					 :foreground "gray80"
+					 :background "goldenrod"
+					 :box '(:line-width 1 :style released-button))
+(set-face-attribute  'mode-line-inactive
+					 nil
+					 :foreground "gray30"
+					 :background "gray10"
+					 :box '(:line-width 1 :style released-button))
+
+
+(global-set-key (kbd "C-c e") 'erase-buffer)
+(put 'erase-buffer 'disabled nil)
